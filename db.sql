@@ -1,3 +1,9 @@
+IF DB_ID(N'fooddelivery') IS NULL
+BEGIN
+    CREATE DATABASE [fooddelivery];
+END
+GO
+
 USE [fooddelivery]
 GO
 /****** Object:  Table [dbo].[email_confirmation_token]    Script Date: 2025-03-19 오전 10:41:26 ******/
