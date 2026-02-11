@@ -3,7 +3,7 @@ package com.huhurezmarius.restaurants.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.huhurezmarius.restaurants.enums.StatusEnum;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity

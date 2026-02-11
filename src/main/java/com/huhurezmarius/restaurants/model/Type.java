@@ -2,7 +2,7 @@ package com.huhurezmarius.restaurants.model;
 
 import com.huhurezmarius.restaurants.enums.TypeEnum;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "TYPES")
