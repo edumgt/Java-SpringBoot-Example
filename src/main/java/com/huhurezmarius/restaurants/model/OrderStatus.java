@@ -14,13 +14,13 @@ public class OrderStatus implements Serializable {
 
 
     @ManyToOne
-    @MapsId("order_id")
+    @MapsId("orderId")
     @JoinColumn(name="order_id")
     @JsonIgnore
     private Order order;
 
     @ManyToOne
-    @MapsId("status_id")
+    @MapsId("statusId")
     @JoinColumn(name="status_id")
     private Status status;
 

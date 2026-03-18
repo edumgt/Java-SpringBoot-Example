@@ -35,13 +35,13 @@ public class User {
     private String password;
 
     @NotNull
-    @Column(columnDefinition = "bit default 0")
+    @Column(nullable = false)
     private boolean enabled;
 
-    @Column(columnDefinition = "varchar(500) default ''")
+    @Column(length = 500)
     private String photoUrl;
 
-    @Column(columnDefinition = "bit default 0")
+    @Column(nullable = false)
     private boolean blocked;
 
     @ManyToMany(fetch = FetchType.LAZY,cascade = {CascadeType.ALL})
