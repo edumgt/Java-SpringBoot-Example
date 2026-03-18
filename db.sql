@@ -397,3 +397,60 @@ REFERENCES [dbo].[types] ([type_id])
 GO
 ALTER TABLE [dbo].[user_type] CHECK CONSTRAINT [FKweqmhl781j658kkq0qom81ru]
 GO
+
+-- =============================================
+-- Test accounts (password: 123456 BCrypt-encoded)
+-- =============================================
+IF NOT EXISTS (SELECT 1 FROM [dbo].[users] WHERE [email] = 'test1@test.com')
+BEGIN
+    INSERT INTO [dbo].[users] ([blocked],[email],[enabled],[facebook_token],[password],[photo_url],[user_name])
+    VALUES (0, 'test1@test.com', 1, '', '$2b$10$M4QD1wOavYczdnpnXGIXT.gU0go9wdrGV1LD4bo5orB1vGWgDY5wa', '', 'test1')
+END
+GO
+IF NOT EXISTS (SELECT 1 FROM [dbo].[user_role] ur
+               JOIN [dbo].[users] u ON ur.user_id = u.user_id
+               WHERE u.[email] = 'test1@test.com')
+BEGIN
+    INSERT INTO [dbo].[user_role] ([user_id],[role_id])
+    SELECT u.[user_id], r.[role_id]
+    FROM [dbo].[users] u, [dbo].[roles] r
+    WHERE u.[email] = 'test1@test.com' AND r.[name] = 'ROLE_USER'
+END
+GO
+IF NOT EXISTS (SELECT 1 FROM [dbo].[user_type] ut
+               JOIN [dbo].[users] u ON ut.user_id = u.user_id
+               WHERE u.[email] = 'test1@test.com')
+BEGIN
+    INSERT INTO [dbo].[user_type] ([user_id],[type_id])
+    SELECT u.[user_id], t.[type_id]
+    FROM [dbo].[users] u, [dbo].[types] t
+    WHERE u.[email] = 'test1@test.com' AND t.[name] = 'EMAIL'
+END
+GO
+
+IF NOT EXISTS (SELECT 1 FROM [dbo].[users] WHERE [email] = 'test2@test.com')
+BEGIN
+    INSERT INTO [dbo].[users] ([blocked],[email],[enabled],[facebook_token],[password],[photo_url],[user_name])
+    VALUES (0, 'test2@test.com', 1, '', '$2b$10$M4QD1wOavYczdnpnXGIXT.gU0go9wdrGV1LD4bo5orB1vGWgDY5wa', '', 'test2')
+END
+GO
+IF NOT EXISTS (SELECT 1 FROM [dbo].[user_role] ur
+               JOIN [dbo].[users] u ON ur.user_id = u.user_id
+               WHERE u.[email] = 'test2@test.com')
+BEGIN
+    INSERT INTO [dbo].[user_role] ([user_id],[role_id])
+    SELECT u.[user_id], r.[role_id]
+    FROM [dbo].[users] u, [dbo].[roles] r
+    WHERE u.[email] = 'test2@test.com' AND r.[name] = 'ROLE_USER'
+END
+GO
+IF NOT EXISTS (SELECT 1 FROM [dbo].[user_type] ut
+               JOIN [dbo].[users] u ON ut.user_id = u.user_id
+               WHERE u.[email] = 'test2@test.com')
+BEGIN
+    INSERT INTO [dbo].[user_type] ([user_id],[type_id])
+    SELECT u.[user_id], t.[type_id]
+    FROM [dbo].[users] u, [dbo].[types] t
+    WHERE u.[email] = 'test2@test.com' AND t.[name] = 'EMAIL'
+END
+GO

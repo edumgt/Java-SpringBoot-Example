@@ -12,13 +12,13 @@ public class OrderMeal implements Serializable {
     private OrderMealPK id = new OrderMealPK();
 
     @ManyToOne
-    @MapsId("order_id")
+    @MapsId("orderId")
     @JoinColumn(name="order_id")
     @JsonIgnore
     private Order order;
 
     @ManyToOne
-    @MapsId("meal_id")
+    @MapsId("mealId")
     @JoinColumn(name="meal_id")
     private Meal meal;
 
